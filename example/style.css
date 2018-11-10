@@ -1,0 +1,77 @@
+[data-modal] {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Overlay */
+[data-modal]::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.25);
+  content: '';
+}
+
+[data-modal-dialog] {
+  z-index: 1;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background: #fff;
+  padding: 30px;
+  max-width: 640px;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+/* Closed state */
+[data-modal] {
+  transition: z-index 0.5s step-end;
+  z-index: -1;
+}
+
+[data-modal]::before {
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+[data-modal-dialog] {
+  -webkit-transform: translateY(50px);
+  transform: translateY(50px);
+  transition: opacity 0.5s, -webkit-transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  opacity: 0;
+}
+
+/* Opened state */
+[data-modal='open'] {
+  transition: z-index 0.5s step-start;
+  z-index: 100;
+}
+
+[data-modal='open']::before {
+  opacity: 1;
+}
+
+[data-modal='open'] [data-modal-dialog] {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --- Styles for this example page --- */
+body {
+  margin: 0;
+}
+
+h2 {
+  margin-top: 0;
+}
