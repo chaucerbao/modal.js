@@ -11,9 +11,9 @@ Structure your modal similar to the HTML example below. There are 4 attributes t
 
 ```html
 <!-- HTML -->
-<button data-modal-trigger="the-modal-id">Open a modal</button>
+<button data-modal-trigger="modal-id">Open a modal</button>
 
-<div id="the-modal-id" data-modal>
+<div id="modal-id" data-modal>
   <div data-modal-dialog>
     <h1>Amazing title</h1>
     <p>Very intriguing content.</p>
@@ -25,13 +25,25 @@ Structure your modal similar to the HTML example below. There are 4 attributes t
 Initialize your modal(s) with customizable options for each modal.
 ```javascript
 /* JavaScript */
-modal({
-  /* Options specifically for the modal with the ID of 'the-modal-id' */
-  'the-modal-id': {
-    onOpen: () => console.log('Modal opened'),
-    onClose: () => console.log('Modal closed')
+const modalHandler = modal({
+  /* Options specifically for the modal with the ID of 'modal-id' */
+  'modal-id': {
+    onOpen: (modal) => console.log('Modal opened'),
+    onClose: (modal) => console.log('Modal closed')
   }
 })
+```
+
+You can also open/close modals programmatically after initialization.
+```javascript
+/* JavaScript */
+document
+  .getElementById('opener')
+  .addEventListener('click', () => modalHandler.open('modal-id'))
+
+document
+  .getElementById('closer')
+  .addEventListener('click', () => modalHandler.close())
 ```
 
 Now, style your modal ([example](example/style.css)) with CSS.
