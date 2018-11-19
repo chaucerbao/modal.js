@@ -13,23 +13,14 @@ const modal = (options: IOptions = {}) => {
     if (element) {
       // Trigger
       if (element.hasAttribute('data-modal-trigger')) {
-        const targetModal = document.getElementById(
-          element.getAttribute('data-modal-trigger')!
-        )
-
-        if (targetModal) {
-          const onOpen = options[targetModal.id] && options[targetModal.id].onOpen
-
-          targetModal.setAttribute('data-modal', 'open')
-
-          if (typeof onOpen === 'function') {
-            onOpen()
-          }
-        }
+        openModal(element.getAttribute('data-modal-trigger')!, options)
       }
 
       // Close modal
-      if (element.hasAttribute('data-modal') || element.hasAttribute('data-modal-close')) {
+      if (
+        element.hasAttribute('data-modal') ||
+        element.hasAttribute('data-modal-close')
+      ) {
         closeModal(options)
       }
     }
@@ -40,6 +31,25 @@ const modal = (options: IOptions = {}) => {
       closeModal(options)
     }
   })
+
+  return {
+    open: (id: string) => openModal(id, options),
+    close: () => closeModal(options)
+  }
+}
+
+const openModal = (id: string, options: IOptions = {}) => {
+  const targetModal = document.getElementById(id)
+
+  if (targetModal) {
+    const onOpen = options[id] && options[id].onOpen
+
+    targetModal.setAttribute('data-modal', 'open')
+
+    if (typeof onOpen === 'function') {
+      onOpen()
+    }
+  }
 }
 
 const closeModal = (options: IOptions = {}) => {
