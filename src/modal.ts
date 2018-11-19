@@ -1,14 +1,14 @@
 // Type Definitions
 interface IOptions {
   [id: string]: {
-    onOpen: () => void
-    onClose: () => void
+    onOpen: (modal: Element) => void
+    onClose: (modal: Element) => void
   }
 }
 
 const modal = (options: IOptions = {}) => {
   document.body.addEventListener('click', (e: MouseEvent) => {
-    const element = e.target as HTMLElement
+    const element = e.target as Element
 
     if (element) {
       // Trigger
@@ -47,22 +47,22 @@ const openModal = (id: string, options: IOptions = {}) => {
     targetModal.setAttribute('data-modal', 'open')
 
     if (typeof onOpen === 'function') {
-      onOpen()
+      onOpen(targetModal)
     }
   }
 }
 
 const closeModal = (options: IOptions = {}) => {
-  const modal = document.querySelector('[data-modal="open"]')
+  const targetModal = document.querySelector('[data-modal="open"]')
 
-  if (modal) {
-    const onClose = options[modal.id] && options[modal.id].onClose
+  if (targetModal) {
+    const onClose = options[targetModal.id] && options[targetModal.id].onClose
 
     if (typeof onClose === 'function') {
-      onClose()
+      onClose(targetModal)
     }
 
-    modal.setAttribute('data-modal', '')
+    targetModal.setAttribute('data-modal', '')
   }
 }
 
