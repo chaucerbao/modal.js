@@ -4,10 +4,10 @@ A simple, tiny modal.
 
 ## Usage
 Structure your modal similar to the HTML example below. There are 4 attributes that Modal.js recognizes:
-`data-modal` - The modal container
-`data-modal-dialog` - The dialog box that houses the modal's content
-`data-modal-trigger` - Add it to any element(s) to attach a click-handler for opening a modal with the given ID
-`data-modal-close` - (Optional) Add it to any element(s) to attach a click-handler for closing the modal
+- `data-modal` - The modal container
+- `data-modal-dialog` - The dialog box that houses the main content
+- `data-modal-trigger` - Add it to any element(s) to attach a click-handler for opening a modal with the given ID
+- `data-modal-close` - (Optional) Add it to any element(s) to attach a click-handler for closing the modal
 
 ```html
 <!-- HTML -->
@@ -57,7 +57,7 @@ Now, style your modal ([example](example/style.css)) with CSS.
 ## Options
 Available options for `modal(options)` where `options` are defined for each modal by its ID.
 
-Option  | Type     | Description
-------- | -------- | -----------
-onOpen  | function | A callback function to run when a modal is opened
-onClose | function | A callback function to run when a modal is closed
+Option  | Type            | Description
+------- | --------------- | -----------
+onOpen  | function(modal) | A callback to run when a modal is opened
+onClose | function(modal) | A callback to run when a modal is closed
