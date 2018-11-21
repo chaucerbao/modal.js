@@ -26,10 +26,16 @@ Initialize your modal(s) with customizable options for each modal.
 ```javascript
 /* JavaScript */
 const modalHandler = modal({
+  /* Options for all modals */
+  '*': {
+    onOpen: () => console.log('onOpen *'),
+    onClose: () => console.log('onClose *')
+  },
+
   /* Options specifically for the modal with the ID of 'modal-id' */
   'modal-id': {
-    onOpen: (modal) => console.log('Modal opened'),
-    onClose: (modal) => console.log('Modal closed')
+    onOpen: (modal) => console.log('Modal opened', modal),
+    onClose: (modal) => console.log('Modal closed', modal)
   }
 })
 ```

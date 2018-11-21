@@ -42,13 +42,14 @@ const openModal = (id: string, options: IOptions = {}) => {
   const targetModal = document.getElementById(id)
 
   if (targetModal) {
-    const onOpen = options[id] && options[id].onOpen
+    const callbacks = ['*', id]
+    const onOpen = callbacks
+      .map(key => options[key] && options[key].onOpen)
+      .filter(callback => callback)
 
     targetModal.setAttribute('data-modal', 'open')
 
-    if (typeof onOpen === 'function') {
-      onOpen(targetModal)
-    }
+    onOpen.forEach(callback => callback(targetModal))
   }
 }
 
@@ -56,11 +57,12 @@ const closeModal = (options: IOptions = {}) => {
   const targetModal = document.querySelector('[data-modal="open"]')
 
   if (targetModal) {
-    const onClose = options[targetModal.id] && options[targetModal.id].onClose
+    const callbacks = [targetModal.id, '*']
+    const onClose = callbacks
+      .map(key => options[key] && options[key].onClose)
+      .filter(callback => callback)
 
-    if (typeof onClose === 'function') {
-      onClose(targetModal)
-    }
+    onClose.forEach(callback => callback(targetModal))
 
     targetModal.setAttribute('data-modal', '')
   }

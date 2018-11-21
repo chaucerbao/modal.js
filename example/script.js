@@ -1,9 +1,13 @@
 import modal from '../src/modal'
 
 const modalHandler = modal({
+  '*': {
+    onOpen: (_modal) => console.log('onOpen *'),
+    onClose: (_modal) => console.log('onClose *')
+  },
   'modal-id': {
-    onOpen: () => console.log('Modal opened'),
-    onClose: () => console.log('Modal closed')
+    onOpen: (modal) => console.log('Modal opened', modal),
+    onClose: (modal) => console.log('Modal closed', modal)
   }
 })
 
